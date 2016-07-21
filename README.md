@@ -1,5 +1,3 @@
-# KisOils ERP system
-[![CircleCI](https://circleci.com/gh/ashnyc/ERP.svg?style=shield&circle-token=7f987f6938bb2c11c23dfdf1bdfd9a90a9667aac)](https://circleci.com/gh/ashnyc/ERP)
 
 ###  GIT workflow
 1. Create a branch for your feature:
@@ -46,9 +44,6 @@ git push origin master
 
 ### Heroku deployment
 Running on Heroku at: http://kisoils.heroku.com/.
-
-Deploys are done automatically after every commit to master. 
-Remember to set environment variables - see .env file
 
 ### Running locally 
 ```
