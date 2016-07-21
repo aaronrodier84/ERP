@@ -1,0 +1,60 @@
+{
+  "name": "ERP",
+  "description": "",
+  "scripts": {
+    "postdeploy": "rake db:migrate"
+  },
+  "env": {
+    "AWS_ACCESS_KEY_ID": {
+      "required": true
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "required": true
+    },
+    "LANG": {
+      "required": true
+    },
+    "MWS_MARKETPLACE_ID": {
+      "required": true
+    },
+    "MWS_MERCHANT_ID": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "required": true
+    },
+    "TZ": {
+      "required": true
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1
+    },
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "cloudinary",
+    "memcachier",
+    "heroku-postgresql",
+    "redistogo",
+    "scheduler",
+    "sendgrid"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}

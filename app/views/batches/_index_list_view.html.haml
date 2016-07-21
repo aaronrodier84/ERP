@@ -1,0 +1,21 @@
+.row
+  .col-lg-12
+    = index_table 'batch-list' do
+      %thead
+        %th Zone
+        %th Product
+        %th.quantity Qty
+        %th.date Date
+        %th Users
+        %th.notes Notes
+        %th
+      %tbody
+        -batches.each do |batch|
+          %tr
+            %td= zone_label(batch.zone)
+            %td=render "products/product_as_icon_and_text", product: batch.product
+            %td= batch.quantity
+            %td= batch.completed_on&.to_s(:short)
+            %td= user_list(batch.users)
+            %td.text-left= batch.notes
+            %td= link_to 'Edit', edit_batch_path(batch)

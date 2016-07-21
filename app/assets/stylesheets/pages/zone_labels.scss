@@ -1,0 +1,24 @@
+@import "variables_and_mixins";
+
+.zone-label {
+  text-align: center;
+  font-size: 80%;
+  font-weight: bold;
+  // text-transform: uppercase;
+  color: white;
+  &.zone-make { background-color: $zone-make; }
+  &.zone-pack { background-color: $zone-pack; }
+  &.zone-ship { background-color: $zone-ship; }
+  &.zone-fba  { background-color: $zone-fba;  }
+}
+
+div.zone-label,
+span.zone-label {
+  border-radius: .25em;
+}
+div.zone-label {
+  padding: .3em .6em .2em;
+}
+span.zone-label {
+  padding: .4em .6em .3em;
+}

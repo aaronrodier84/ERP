@@ -1,0 +1,14 @@
+= page_header do
+  %i.fa.fa-cogs.fa-fw
+  Zones
+
+.row
+  .col-lg-12
+    = index_table do
+      %thead
+        %tr
+          %th
+          %th Name
+          %th Production Order
+      %tbody
+        = render partial: 'zone', collection: @zones

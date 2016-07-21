@@ -1,0 +1,7 @@
+%tr
+  %td.text-center
+    = link_to edit_admin_zone_path(zone) do
+      %span.icon-edit.icon-large
+        Edit
+  %td.text-center= zone_label(zone)
+  %td.text-center= zone.production_order

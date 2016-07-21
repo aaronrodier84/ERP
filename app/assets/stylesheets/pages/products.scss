@@ -1,0 +1,169 @@
+@import "variables_and_mixins";
+
+// --- --- Products - tile view
+.panel.product_as_tile {
+  text-align: center;
+
+  .panel-body { padding-top: 0; }
+
+  .title {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 2px;
+    min-height: 64px;
+    font-size: 14px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .thumbnail {
+    height: 125px;
+    margin-top: 20px;
+  }
+
+  .details {
+    margin-bottom: 20px;
+    text-align: center;
+    p { margin: 0; }
+  } 
+
+  .coverage {
+    min-height: 100px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    .primary { 
+      font-size: 36px;
+      margin-top: 20px;
+      line-height: 40px;
+    }
+    .secondary { 
+      font-size: 20px; 
+    }
+  }
+
+  border-width: 2px;
+  border-style: solid;
+}
+
+// --- --- Products - table view
+// warehouse select
+.toolbox {
+  margin-bottom: 20px;
+  select { width: auto; }
+  
+  .group {
+    float: left; 
+    margin: 0 20px 0 0;
+
+    select, input, a {
+      float: left; 
+      margin: 0 0 3px 5px;
+    }
+  }
+
+  .js-ship-panel {
+    min-width: 400px;
+  }
+
+  .items-cases-toggler {
+    margin-bottom: 10px;
+  }
+}
+
+table.product-list {
+  thead > tr > th { 
+    font-weight: normal;
+  }
+
+  .progress.case-excess,
+  .progress.fba-coverage {
+    margin: 5px 0;
+    .progress-bar {
+      color: $almost_black;
+    }
+  }
+  .progress.case-excess {
+    .progress-bar {
+      background-color: #c9c9c9;
+    }
+  }
+
+  .progress.fba-coverage { 
+    .progress-bar {
+      background-color: $zone-ship;
+    }
+  }
+}
+
+
+// Product icon + title + Fnsku as on Batches#index and Products#index#ship
+.product-with-icon {
+  .image {
+    text-align: center;
+    float: left;
+    width: 50px;
+    img { 
+      max-height: 50px; 
+      max-width: 50px; 
+    }
+  }
+  .info {
+    margin-left: 50px;
+    text-align: left;
+    p { margin: 0; }
+  }
+}
+
+
+// --- --- Product Details page
+#product-details {
+  .product-checkboxes {
+    margin-bottom: 60px;
+    .product-active, .product-zones {
+      float: left;
+      margin-right: 40px;
+    }
+    .product-zones {
+      .form-group {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .control-label {
+        padding-right: 15px;
+      }
+    }
+  }
+
+  .show-product-inventory {
+    table {
+      width: auto;
+      max-width: 100%;
+      margin-bottom: 20px;
+      tr:first-child td { border-top: none; }
+      td.cost-header {
+        text-align: center;
+        color: $gray;
+      }
+      tr.days-of-cover td {
+        border-top: none;
+      }
+      tr.total {
+        font-weight: bold;
+        td:first-child { font-weight: normal; }
+      }
+    }
+  }
+
+  .show-production-forecast {
+    table {
+      th { font-weight: normal; }
+    }
+  }
+}
+
+// --- --- ?
+.shipment-status-messagebox{
+  display: none;
+}
+

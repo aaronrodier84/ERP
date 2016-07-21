@@ -1,0 +1,30 @@
+.edit-product-ingredients.js-edit-product-ingredients{data: {'product-id' => @product.id }}
+  = page_header do
+    = image_tag @product.small_image_url
+    .header-content
+      %span.primary-text Edit Product Ingredients
+      %span.secondary-text= @product.internal_title
+
+  .row
+    .col-lg-12
+      %table
+        %thead
+          %tr
+            %th Name
+            %th Quantity
+            %th Unit
+            %th
+        %tbody
+          - @product.ingredients.each do |ingredient|
+            =render 'ingredients/form_tr', ingredient: ingredient
+          =render 'ingredients/form_tr', ingredient: Ingredient.new, tr_class: "js-ingredient-template"
+      %p
+        = link_to "#", class: "js-add-ingredient" do
+          %i.fa.fa-plus
+          Add another ingredient
+
+  .row.actions
+    .col-lg-12
+      = link_to "Cancel", product_path(@product), class: "btn btn-default"
+      = link_to "Save", "#", class: "btn btn-primary js-save"
+

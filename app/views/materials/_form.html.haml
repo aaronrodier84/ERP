@@ -1,0 +1,21 @@
+.row
+  .col-lg-4.col-md-5.col-sm-6
+    = bootstrap_form_for material, label_errors: true do |f|
+      .control-group
+        = f.collection_select :zone_id, Zone.ordered, :id, :name, {}, {class: 'width-auto'}
+
+      .control-group
+        = f.text_field :name
+
+      .control-group
+        = f.text_field :unit, label: "Unit of measure", class: 'small'
+
+      .control-group
+        = f.number_field :unit_price, step: :any, class: 'small'
+
+      .control-group
+        = f.number_field :inventory_quantity, label: "Inventory quantity (in units of measure)", class: 'small'
+
+      .form-actions
+        = f.submit 'Save', class: 'btn btn-primary pull-right save'
+        = link_to 'Cancel', materials_path, class: 'btn btn-default pull-right'

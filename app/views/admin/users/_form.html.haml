@@ -1,0 +1,45 @@
+= page_header do
+  %i.fa.fa-user.fa-fw
+  Name & email
+
+.row
+  .col-lg-6
+    = bootstrap_form_for [:admin, user], label_errors: true do |f|
+      .control-group
+        = f.text_field :first_name
+
+      .control-group
+        = f.text_field :last_name
+
+      .control-group
+        = f.text_field :email
+
+      .control-group
+        .user-zones
+          = f.collection_check_boxes :zone_ids, zones, :id, :name, inline: true, multiple: true, label: 'Zones: '
+
+      .control-group
+        = f.check_box :is_active
+
+      .form-actions
+        = f.submit "Save", class: "btn btn-primary pull-right save"
+        = link_to "Cancel", admin_users_path, class: "btn btn-default pull-right"
+
+-if user == current_user
+  = page_header do
+    %i.fa.fa-lock.fa-fw
+    Change password
+  .row
+    .col-lg-6
+      = bootstrap_form_for([:admin, user]) do |f|
+        .field
+          = f.email_field :email, autofocus: true
+        .field
+          = f.password_field :password, autocomplete: "off", help: "(leave blank if you don't want to change it)"
+        .field
+          = f.password_field :password_confirmation, autocomplete: "off"
+        .field
+          = f.password_field :current_password, autocomplete: "off", help: "(we need your current password to confirm your changes)"
+        .actions
+          = f.submit "Save", class: "btn btn-primary pull-right save"
+          = link_to "Cancel", admin_users_path, class: "btn btn-default pull-right"

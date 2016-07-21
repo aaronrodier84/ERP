@@ -1,0 +1,56 @@
+%table.table.index-table.block-centered
+  %tbody
+    %tr.separator
+      %td.bold{colspan: 2} Local warehouse
+      %td.cost-header Cost
+    
+    -if product_presenter.has_make_zone?
+      %tr
+        %td
+          .zone-label.zone-make Made
+        %td= product_presenter.made_inventory_quantity
+        %td.text-right= number_to_currency product_presenter.made_inventory_ingredients_cost
+    
+    -if product_presenter.has_pack_zone?
+      %tr
+        %td
+          .zone-label.zone-pack Packed
+        %td= product_presenter.packed_inventory_quantity
+        %td.text-right= number_to_currency product_presenter.packed_inventory_ingredients_cost
+    
+    %tr.total
+      %td.text-right Local total:
+      %td= product_presenter.made_plus_packed_inventory_total
+      %td.text-right= number_to_currency product_presenter.made_plus_packed_cost_total
+
+    %tr.separator
+      %td{colspan: 2} 
+        %span.bold FBA warehouse
+      %td.cost-header Value
+    
+    %tr
+      %td
+        .zone-label.zone-ship Shipped
+      %td= product_presenter.inbound_shipped
+      %td.text-right= number_to_currency product_presenter.inbound_shipped_cost_total
+    
+    %tr
+      %td
+        .zone-label.zone-fba Fulfillable
+      %td= product_presenter.fulfillable
+      %td.text-right= number_to_currency product_presenter.fulfillable_cost_total
+    
+    %tr.total
+      %td.text-right FBA total:
+      %td= product_presenter.fba_total
+      %td.text-right= number_to_currency product_presenter.fba_cost_total
+    
+    %tr.days-of-cover
+      %td.text-left{colspan: 3} 
+        %p
+          Reserved: 
+          %span.bold= product_presenter.reserved
+        %p
+          Days of cover:
+          %span.bold= product_presenter.days_of_cover
+          %span.gray= product_presenter.days_of_cover_hint

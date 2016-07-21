@@ -1,0 +1,44 @@
+%table.model-fields
+  %tr.separator
+    %td{colspan: 2}
+      %span.pull-right= link_to 'Edit', edit_admin_settings_path(address: true)
+      %span.header 
+        %i.fa.fa-envelope-o
+        Factory Address
+  %tr
+    %td Name:
+    %td= setting.address_name
+  %tr
+    %td Address line 1:
+    %td= setting.address_line1
+  %tr
+    %td Address line 2:
+    %td= setting.address_line2
+  %tr
+    %td City:
+    %td= setting.address_city
+  %tr
+    %td State:
+    %td= setting.address_state
+  %tr
+    %td Zip code:
+    %td= setting.address_zip_code
+  %tr
+    %td Country:
+    %td= setting.address_country
+
+  %tr.separator
+    %td{colspan: 2}
+      %span.pull-right= link_to 'Edit', edit_admin_settings_path(amazon_credentials: true)
+      %span.header 
+        %i.fa.fa-key
+        Amazon API Credentials
+  %tr
+    %td AWS access key ID:
+    %td= setting.aws_access_key_id
+  %tr
+    %td Seller (Merchant) ID:
+    %td= setting.mws_merchant_id
+  %tr
+    %td Marketplace ID:
+    %td= setting.mws_marketplace_id

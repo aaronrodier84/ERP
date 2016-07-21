@@ -1,0 +1,64 @@
+
+!!!
+%html
+  %head
+    %title Kis Oils
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+
+    #wrapper
+      = render partial: "shared/flash", :locals => {:flash => flash}
+      / Navigation
+      %nav.navbar.navbar-default.navbar-static-top{:role => "navigation", :style => "margin-bottom: 0"}
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          .navbar-brand
+            =link_to 'Kis Oils', root_path
+
+        / /.navbar-header
+        %ul.nav.navbar-top-links.navbar-right
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %i.fa.fa-user.fa-fw
+              %i.fa.fa-caret-down
+            %ul.dropdown-menu.dropdown-user
+              -if current_user.admin
+                %li
+                  =link_to admin_dashboard_index_path do
+                    %i.fa.fa-wrench.fa-fw
+                    Admin dashboard
+                %li
+                  =link_to admin_users_path do
+                    %i.fa.fa-user.fa-fw
+                    Users
+                %li
+                  = link_to admin_zones_path do
+                    %i.fa.fa-cogs.fa-fw
+                    Zones
+                %li
+                  = link_to products_path(archived: true) do
+                    %i.fa.fa-archive.fa-fw
+                    Archived prducts
+                %li.divider
+
+              %li
+                =link_to 'Logout', destroy_user_session_path, :method => :delete
+
+        .navbar-default.sidebar{:role => "navigation"}
+          .sidebar-nav.navbar-collapse
+            %ul#side-menu.nav
+              =nav_link 'Product Inventory', 'fa-barcode', products_path, 'products'
+              =nav_link 'Batches', 'fa-object-group', batches_path, 'batches'
+              =nav_link 'Vendors', 'fa-users', vendors_path, 'vendors'
+              =nav_link 'Materials and Parts', 'fa-flask', materials_path, 'materials'
+
+      #page-wrapper
+        =yield

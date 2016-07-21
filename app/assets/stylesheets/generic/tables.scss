@@ -1,0 +1,80 @@
+@import "variables_and_mixins";
+
+// --- --- Generic table styles
+table.table {
+  width: auto;
+  th, td {
+    p { margin: 0; }
+  }
+
+  thead > tr > th { 
+    border-bottom-width: 1px; 
+  }
+  thead > tr > th,
+  tbody > tr > td { 
+    padding: 8px 15px;
+  }
+
+  tr.total td {
+    border-top: 1px solid $almost-black;
+  }
+} 
+
+table {
+  th, td {
+    &.width-70  { width: 70px;}
+    &.width-100 { width: 100px;}
+    &.width-120 { width: 120px;}
+    &.width-150 { width: 150px;}
+  }
+}
+
+// --- --- Tables used on index pages
+table.index-table {
+  width: auto;
+  th { text-align: center; }
+
+  tbody tr td {
+    vertical-align: middle;
+    text-align: center;
+    &.text-left  { text-align: left; }
+    &.text-right { text-align: right; }
+  }
+
+  td.checkbox-inside {
+    label { display: none; }
+  }
+
+}
+
+// --- --- Tables used on Details pages
+table.model-fields {
+  tr, th, td { border: none; }
+
+  td:first-child {
+    text-align: right;
+  }
+
+  td { padding: 8px 10px; }
+  &.condensed td { padding: 3px 8px; }
+}
+
+
+// --- --- Separator (divider)
+table tbody {
+  tr.separator {
+    border-bottom: 1px solid $blue;
+
+    td { 
+      padding-top: 16px;
+      padding-bottom: 3px;
+      border-top: none;
+      &:first-child { text-align: left !important; }
+    }
+
+    span.header {
+      font-size: 16px;
+      color: $blue;
+    }
+  }
+}

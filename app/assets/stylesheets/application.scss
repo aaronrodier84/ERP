@@ -1,0 +1,78 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require rails_bootstrap_forms
+ *= require font-awesome/css/font-awesome
+ *= require datepicker
+ *= require startbootstrap-sb-admin-2/dist/css/sb-admin-2
+ *= require bootstrap/dist/css/bootstrap
+ *= require_tree .
+ *= require_self
+ */
+
+.nav {
+  .active {
+    background-color: #eee;
+  }
+}
+
+#devise {
+  h2.brand {
+    margin-top: 80px;
+    font-family: 'ProximaNova', sans-serif;
+    letter-spacing: 0.2em !important;
+    color: #5e5c5c;
+    text-transform: uppercase;
+    font-size: 37px;
+    text-align: center;
+  }
+
+  .login-panel {
+    margin-top: 10%;
+  }
+
+  .sign-in-error {
+    padding: 8px;
+    margin: 8px 0;
+    color: red;
+    font-weight: bold;
+  }
+}
+
+.danger-zone {
+	margin-top: 100px;
+}
+
+.save {
+	margin-left: 15px;
+}
+
+.thumbnail {
+	border: none !important;
+}
+
+.panel {
+  padding: 0 !important;
+}
+
+/* users */
+.highlight {
+	background-color: #ffffcc !important;
+}
+
+/* batches */
+.label {
+  margin-right: 3px;
+}
+
+
+

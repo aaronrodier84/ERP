@@ -1,0 +1,43 @@
+%table.model-fields.condensed
+  %tr
+    %td Production buffer:
+    %td= in_place_editable_with_reload product_presenter.product, :production_buffer_days, min: 0, class: 'xsmall'
+  %tr
+    %td Demand forecasting:
+    %td= product_presenter.total_demand
+
+%br
+  
+%table.table.index-table.block-centered
+  %thead
+    %tr
+      %th
+      %th.width-70 Current Inventory
+      %th.width-70 Demand Allocation
+      %th.width-70 Production Allocation
+  %tbody
+    -if product_presenter.has_make_zone?
+      %tr
+        %td
+          .zone-label.zone-make Make
+        %td= product_presenter.made_inventory_quantity
+        %td.bold= product_presenter.make_demand
+        %td= product_presenter.to_make
+    
+    -if product_presenter.has_pack_zone?
+      %tr
+        %td
+          .zone-label.zone-pack Pack
+        %td= product_presenter.packed_inventory_quantity
+        %td.bold= product_presenter.pack_demand
+        %td= product_presenter.to_pack
+    
+    -if product_presenter.has_ship_zone?
+      %tr
+        %td
+          .zone-label.zone-ship FBA
+        %td= product_presenter.fba_total
+        %td.bold= product_presenter.ship_demand
+        %td= product_presenter.to_ship
+    
+

@@ -1,0 +1,24 @@
+= page_header do
+  %i.fa.fa-flask
+  Materials and Parts
+  = link_to 'New', new_material_path, :class => 'btn btn-primary pull-right'
+
+.row
+  .col-lg-12
+    = index_table 'materials-list' do
+      %thead
+        %th 
+        %th Name
+        %th.width-150 Inventory Quantity
+        %th Unit of Measure
+        %th Unit Price
+        %th
+      %tbody
+        -@materials.each do |material|
+          %tr{ data: { "material-id" => material.id } }
+            %td= zone_label(material.zone)
+            %td.text-left= material.name
+            %td= in_place_editable material, :inventory_quantity, min: 0
+            %td= material.unit
+            %td= with_currency material.unit_price
+            %td= link_to 'Edit', edit_material_path(material)

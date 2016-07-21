@@ -1,0 +1,45 @@
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+
+Rails:
+  Enabled: true
+
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/ClassLength:
+  Exclude: 
+    - test/**/*
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/HashSyntax:
+  Enabled: false
+  EnforcedStyle: ruby19_no_mixed_keys
+
+# no need for 'fail' alias, it's the same and just make it harder
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+Style/ExtraSpacing:
+  Enabled: false
+
+Style/SpaceBeforeFirstArg:
+  Enabled: false
+
+# usually it doesn't affect code in bad way by reusing same name instead
+# of coming with some short version
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false
+
+# no point in documentation in code on this stage of project
+Style/Documentation:
+  Enabled: false 

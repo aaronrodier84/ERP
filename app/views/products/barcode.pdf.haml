@@ -1,0 +1,8 @@
+#barcode
+  = image_tag @barcode_image
+  %p#fnsku
+    = @product.fnsku
+  %p#title
+    = @product.title.gsub("&nbsp;", "")[0..45]
+  %p#condition
+    = "NEW"

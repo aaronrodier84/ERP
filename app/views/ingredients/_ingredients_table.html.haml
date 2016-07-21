@@ -1,0 +1,8 @@
+- ingredient_presenters.each do |ingredient_presenter|
+  %tr
+    %td.text-left= ingredient_presenter.material_name
+    %td.text-center= ingredient_presenter.quantity_with_unit
+    %td.text-right= with_currency ingredient_presenter.cost
+%tr.total
+  %td.text-right{colspan: 2} Subtotal:
+  %td.text-right.bold= with_currency total_cost

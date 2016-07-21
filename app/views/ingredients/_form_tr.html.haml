@@ -1,0 +1,19 @@
+- tr_class ||= ''
+%tr.js-ingredient{class: tr_class}
+  %td 
+    %select.js-material.form-control
+      %option{value: 0}
+      - Zone.ordered.includes(:materials).each do |zone|
+        - if zone.materials.any?
+          %optgroup{label: zone.name}
+            - zone.materials.each do |material|
+              %option{value: material.id, selected: (material == ingredient.material), 
+                data: {:unit => material.unit, 'unit-price' => material.unit_price}}
+                = material.name
+  %td
+    %input.js-quantity.form-control.xsmall{type: :number, value: ingredient.quantity}
+  %td
+    %span.js-unit= ingredient.material_unit
+  %td
+    = link_to '#', class: 'js-remove' do
+      %i.fa.fa-times

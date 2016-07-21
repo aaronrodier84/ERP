@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %title Kis Oils
+    = wicked_pdf_stylesheet_link_tag 'application'
+    = csrf_meta_tags
+  %body#barcode-body
+    = yield
+

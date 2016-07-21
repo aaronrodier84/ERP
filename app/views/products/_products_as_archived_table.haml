@@ -1,0 +1,13 @@
+.row
+  .col-lg-8
+    = index_table 'product-list' do
+      %thead
+        %th Product
+        %th Size
+        %th List Price
+      %tbody
+        - presenter.product_presenters.each do |product_presenter|
+          %tr
+            %td= render "products/product_as_icon_and_text", product: product_presenter.product
+            %td= product_presenter.product_size
+            %td= number_to_currency product_presenter.list_price_amount

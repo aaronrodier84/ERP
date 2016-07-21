@@ -1,0 +1,31 @@
+#product-details
+  = page_header do
+    %i.fa.fa-object-group.fa-fw
+    Batch Details
+
+  .row
+    .col-lg-1
+      .thumbnail
+        = image_tag batch.product.small_image_url
+    .col-lg-11.valign
+      %h4
+        = batch.product.title
+  .row
+    .col-lg-6
+      .panel.panel-default
+        .panel-heading
+          Batch information
+        .panel-body
+          %p
+            %b Zone
+            = batch.zone.name
+          %p
+            %b Quantity
+            = batch.quantity
+          %p
+            %b Date
+            = batch.completed_on&.to_s(:long)
+          %p
+            %b FNSKU
+            = batch.product.fnsku
+

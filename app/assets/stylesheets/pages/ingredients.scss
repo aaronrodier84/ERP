@@ -1,0 +1,28 @@
+@import "variables_and_mixins";
+
+.edit-product-ingredients {
+  table {
+    border: none;
+    margin-bottom: 10px;
+    td, th {
+      text-align: center;
+      padding: 5px 10px 5px 0;
+    }
+
+    tr.js-ingredient-template {
+      display: none;
+    }
+  }
+
+  .actions {
+    margin-top: 20px;
+    .btn {margin-right: 10px;}
+  }
+}
+
+.show-product-ingredients {
+  table {
+    tr:first-child td { border-top: none; }
+    width: auto;
+  }
+}

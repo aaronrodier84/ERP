@@ -1,0 +1,14 @@
+= page_header do
+  %i.fa.fa-wrench
+  Admin Dashboard
+    
+.row
+  .col-lg-12
+    %p= button_to 'Fetch products', admin_fetch_products_path, :method => 'get', :class => 'btn btn-primary'
+    %p= button_to 'Refresh FBA Allocation', admin_refresh_fba_allocations_path, :method => 'get', :class => 'btn btn-primary'
+    %p= button_to 'Background job dashboard', '/sidekiq', :method => 'get', :class => 'btn btn-primary'
+    %br
+
+.row
+  .col-lg-12
+    =render 'admin/settings/settings', setting: @setting

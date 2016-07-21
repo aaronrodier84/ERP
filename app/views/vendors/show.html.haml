@@ -1,0 +1,44 @@
+#vendor-details
+  .row
+    .col-lg-12
+      %h1
+        %i.fa.fa-user
+        = @vendor.name
+      %a{href: "tel: #{@vendor.phone}"}
+        = @vendor.phone
+
+      %br
+      - if !@vendor.address.nil?
+        %br
+        %div
+          = @vendor.address.gsub(/[\n]/,"<br/>").html_safe
+      %hr
+  .row
+    .col-lg-12
+      %h3
+        Invoices
+      .panel-body
+        .table-responsive
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th
+                  Invoice #
+                %th
+                  Invoice Total
+                %th
+                  Invoice Date
+                %th
+                  Due Date
+
+            %tbody
+              - @vendor.invoices.each do |invoice|
+                %tr
+                  %td
+                    = link_to invoice.id, '#'
+                  %td
+                    = number_to_currency(invoice.total)
+                  %td
+                    = invoice.created_at
+                  %td
+                    = invoice.due_date

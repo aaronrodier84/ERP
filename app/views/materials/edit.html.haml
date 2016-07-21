@@ -1,0 +1,13 @@
+= page_header do
+  %i.fa.fa-flask
+  Edit Material
+
+= render 'form', material: @material
+
+.row.danger-zone
+  .col-lg-4.col-md-5.col-sm-6
+    .panel.panel-default
+      .panel-heading.danger
+        Danger zone
+      .panel-body
+        = link_to "Delete this Material", @material, method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure? This material will disappear from all product ingredients."}

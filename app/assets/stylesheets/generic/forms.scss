@@ -1,0 +1,32 @@
+@import "variables_and_mixins";
+
+input.xsmall { max-width: 80px; }
+input.small  { max-width: 120px; }
+input.medium { max-width: 200px; }
+input.width-500 { max-width: 500px; }
+select.width-auto { width: auto; max-width: 100%; }
+
+input[type='number'] {text-align: right;}
+input[type=checkbox].large {
+  width:  16px;
+  height: 16px;
+}
+
+form label { 
+  font-weight: normal; 
+  &.required:after { content:" *"; }
+}
+
+form .form-actions {
+  margin: 20px 0 100px;
+}
+
+
+form .separator {
+  margin: 30px 0 15px;
+  padding: 0 8px 3px;
+  border-bottom: 1px solid $blue;
+  text-align: left; 
+  font-size: 16px;
+  color: $blue;
+}

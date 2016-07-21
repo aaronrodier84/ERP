@@ -1,0 +1,42 @@
+#barcode-body {
+  background: none;
+}
+
+div#barcode {
+  /*Amazon MWS Font label specs: */
+  /*http://docs.developer.amazonservices.com/en_US/fba_guide/FBAGuide_LabelFontSpec.html*/
+  font-family: 'Consolos', 'Monaco', 'Andale Mono';
+  font-size: 9px;
+  top: 0px;
+  left: 0px;
+  img {
+    position: absolute;
+    top: 0px;
+    height: 47px;
+    width: 130px;
+    left: 10px;
+  }
+  #fnsku {
+    position: absolute;
+    top: 55px;
+    left: 10px;
+  }
+  #title {
+    position: absolute;
+    font-size: 9px;
+    top: 68px;
+    left: 10px;
+		width: 147px;
+		height: 37px;
+  }
+  #condition {
+    position: absolute;
+    font-weight: bold;
+    top: 95px;
+    left: 10px;
+  }
+  p {
+    margin: 0;
+  }
+}
+

@@ -1,0 +1,45 @@
+= page_header do
+  %i.fa.fa-users
+  Vendors
+  = link_to 'New', new_vendor_path, :class => 'btn btn-primary pull-right'
+
+.row
+  .col-lg-12
+    = index_table do
+      %thead
+        %tr
+          %th
+            %i.fa.fa-user
+            Name
+          %th
+            %i.fa.fa-envelope
+            Email
+          %th
+            %i.fa.fa-phone
+            Phone
+          %th
+            %i.fa.fa-map-marker
+            Address
+          %th
+            %i.fa.fa-cogs
+            Action
+        %tbody
+        - if !@vendors.nil? && !@vendors.blank?
+          - @vendors.each do |vendor|
+            %tr.clickable-row{"data-href": vendor_path(vendor)}
+              %td
+                = link_to vendor.name, vendor_path(vendor)
+              %td
+                = vendor.contact_email
+              %td
+                %a{href: "tel: #{vendor.phone}"}
+                  = vendor.phone
+              %td
+                = vendor.address
+              %td
+                = link_to 'Edit', edit_vendor_path(vendor)
+                |
+                = link_to 'Delete', vendor_path(vendor), :method => :delete
+        - else
+          %td{:colspan => 5}
+            No vendors found

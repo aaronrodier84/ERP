@@ -1,0 +1,29 @@
+@import "variables_and_mixins";
+
+.gray { color: $gray; }
+.background-gray { background-color: $light-gray }
+.highlighted {background-color: #FFFFB8}
+.error-overflow {background-color: #FF0000;}
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+.font-large {font-size: 18px;}
+
+.hidden { display: none; }
+
+.block-centered { margin: 0 auto; }
+
+.urgency-border.urgency-red    { border-color: $urgency-red; }
+.urgency-border.urgency-yellow { border-color: $urgency-yellow; }
+.urgency-border.urgency-green  { border-color: $urgency-green; }
+
+
+span.badge { background-color: $blue; }
+span.badge.inverted { 
+  background-color: transparent; 
+  border: 1px dotted $blue;
+  color: $blue;
+}
+span.badge.light { font-weight: normal; }
+
+
+

@@ -1,0 +1,35 @@
+= page_header do
+  %i.fa.fa-object-group.fa-fw
+  Batches
+
+%ul.nav.nav-tabs{role: "tablist"}
+
+  %li{role: "presentation",
+        class: "active"}
+    %a.js-batchs-view-tab{href: "#list-view",
+        role: "tab",
+        data: { toggle: "batches-view",
+                  view: "list-view" }}
+      %i.fa.fa-list
+      = "List View"
+  %li{role: "presentation",
+        class: ""}
+    %a.js-batchs-view-tab{href: "#graph-view",
+        role: "tab",
+        data: { toggle: "batches-view",
+                  view: "graph-view" }}
+      %i.fa.fa-bar-chart
+      = "Graph View"
+
+.tab-content
+  .tab-pane{role: "tabpanel",
+    id: "list-view",
+    class: "js-tab-batches-list-view active"}
+    =render 'index_list_view', batches: batches
+
+  .tab-pane{role: "tabpanel",
+    id: "graph-view",
+    class: "js-tab-batches-graph-view"}
+    =render 'index_graph_view', batches: batches
+
+

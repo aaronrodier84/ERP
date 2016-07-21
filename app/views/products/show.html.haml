@@ -1,0 +1,98 @@
+#product-details
+  = page_header do
+    %i.fa.fa-barcode.fa-fw
+    Product Details
+
+  .row
+    .col-lg-1
+      .thumbnail
+        = image_tag @product.small_image_url
+    .col-lg-11.valign
+      %h4
+        = @product.title
+      .internal-title
+        %input{id: 'id', value: @product.id, type: 'hidden'}
+        %input.form-control.width-500{id: 'internal-title', value: @product.internal_title, placeholder: 'Internal Title Here'}
+      .product-checkboxes
+        = bootstrap_form_for @product do |f|
+          .product-zones.js-product-zones
+            = f.collection_check_boxes :zone_ids, Zone.all, :id, :name, inline: true, multiple: true, label: 'Zones:'
+          .product-active
+            = f.check_box :is_active, label: 'Active', class: 'js-product-active'
+
+  .row
+    .col-md-6
+      .panel.panel-default
+        .panel-heading
+          Product information
+        .panel-body
+          %table.model-fields.block-centered
+            %tr
+              %td Seller SKU:
+              %td= @product.seller_sku
+            %tr
+              %td ASIN:
+              %td= @product.asin
+            %tr
+              %td FNSKU:
+              %td= @product.fnsku
+            %tr
+              %td Size:
+              %td= @product.size
+            %tr
+              %td Items per case:
+              %td= in_place_editable_with_reload @product, :items_per_case, min: 0, class: 'xsmall'
+            %tr
+              %td Batch minimum:
+              %td= in_place_editable @product, :batch_min_quantity, min: 0, class: 'xsmall'
+            %tr
+              %td Batch maximum:
+              %td= in_place_editable @product, :batch_max_quantity, min: 0, class: 'xsmall'
+            %tr
+              %td List Price:
+              %td= number_to_currency @product.list_price_amount
+            %tr
+              %td Selling Price:
+              %td= number_to_currency @product.selling_price_amount
+            %tr
+              %td Ranking:
+              %td= @product.sales_rank
+            %tr
+              %td Barcode:
+              %td= link_to 'Barcode PDF', barcode_product_path(@product.id, format: 'pdf')
+
+    .col-md-6
+      .panel.panel-default.show-product-ingredients
+        .panel-heading
+          = link_to 'Edit', edit_ingredients_product_path(@product), class: 'pull-right'
+          Materials
+        .panel-body
+          %table.table.block-centered
+            %tbody
+              - Zone.ordered.each do |zone|
+                -if @product.ingredients_for_zone(zone).any?
+                  %tr.separator
+                    %td.bold{colspan: 3}= zone.name
+                  = render 'ingredients/ingredients_table', ingredient_presenters: @presenter.ingredient_presenters_for_zone(zone), total_cost: @product.zone_ingredients_cost(zone)
+              
+              %tr.separator
+                %td{colspan: 3} &nbsp;  
+              %tr.total
+                %td.text-right.bold{colspan: 2} Total:
+                %td.text-right.bold= with_currency @product.total_ingredients_cost
+
+  .row
+    .col-md-6
+      .panel.panel-default.show-product-inventory
+        .panel-heading
+          Inventory
+        .panel-body
+          = render "product_inventory_table", product_presenter: @presenter
+
+    .col-md-6
+      .panel.panel-default.show-production-forecast
+        .panel-heading
+          Production Forecast
+        .panel-body
+          = render "production_forecast", product_presenter: @presenter
+

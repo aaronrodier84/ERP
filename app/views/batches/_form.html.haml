@@ -1,0 +1,43 @@
+.batch-edit
+  = page_header do
+    = image_tag presenter.product_image_url, id: 'batch_image', alt: presenter.product_title
+    .header-content
+      %span.primary-text
+        = zone_label(presenter.zone)
+        = title
+      %span.secondary-text
+        = presenter.product_title
+
+  .row.js-batch-form
+    .col-lg-6
+      = bootstrap_form_for presenter.batch, label_errors: true do |f|
+        = f.hidden_field :product_id
+        = f.hidden_field :zone_id
+        .row
+          .col-sm-6
+            = f.number_field :quantity, append: "items", step: 1,
+            label_class: "sr-only", class: "js-item-quantity"
+          -if presenter.pack_zone?
+            .col-sm-6
+              = f.number_field :case_quantity, append: "cases", step: 0.01, 
+                label_class: "sr-only", class: "js-case-quantity",
+                data: { "items-per-case" => f.object.product_items_per_case }
+
+        = f.collection_check_boxes :user_ids, presenter.active_users, :id, :name_and_email, label: 'Users'
+        .row
+          .col-sm-6
+            = f.text_field :completed_on, value: (f.object.completed_on || Date.today).to_s(:short), 
+          label: 'Date', class: 'datepicker form-control', readonly: true
+      
+        = f.text_area :notes
+        = f.submit "Save", class: "btn btn-primary pull-right save"
+        = link_to "Cancel", "#", class: "btn btn-default pull-right back-btn"
+
+  .row.danger-zone
+    .col-lg-6
+      .panel.panel-default
+        .panel-heading.danger
+          Danger zone
+        .panel-body
+          = link_to "Delete this batch", presenter.batch, method: :delete, class: 'btn btn-danger'
+          

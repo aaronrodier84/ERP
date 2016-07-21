@@ -1,0 +1,22 @@
+- product = product_presenter.product
+.panel.panel-default.product_as_tile.urgency-border{class: "urgency-#{product.urgency}"}
+  .panel-body
+    = link_or_text product, current_user.admin do
+      .title= product_presenter.optimal_title
+    
+    .thumbnail
+      = link_to new_batch_path(product_id: product.id, zone_id: zone.id) do
+        = image_tag product.small_image_url
+    
+    .details
+      %p
+        %b Size:
+        = product.size
+      %p
+        %b FNSKU:
+        = link_to product.fnsku, barcode_product_path(product.id, format: 'pdf')
+    
+    .coverage
+      .primary= product_presenter.zone_demand(zone)
+      -unless product_presenter.zone_demand_provisioned?(zone)
+        .secondary= product_presenter.to_cover_in_zone(zone)

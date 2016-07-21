@@ -1,0 +1,96 @@
+.row.toolbox
+  .col-lg-12
+    .alert.alert-info.shipment-status-messagebox
+      %button.close ×
+      %span test
+
+    .items-cases-toggler.js-items-cases-toggler.pull-right.btn-group{"data-toggle" => "buttons"}
+      %label.btn.btn-sm.btn-primary.js-items
+        %input#option1{:autocomplete => "off", :checked => "", :name => "options", :type => "radio"}
+          Individual Items
+      %label.btn.btn-sm.btn-primary.js-cases.active
+        %input#option2{:autocomplete => "off", :name => "options", :type => "radio"}
+          Cases
+
+    .group.js-filter
+      %select.js-warehouse.form-control
+        %option{value: 'all'} All warehouses
+        - presenter.warehouses.each do |w|
+          %option{value: w.id}= w.name
+
+    .group.js-ship-panel
+      %input.js-shipment-name.form-control.medium
+      = link_to "Ship Selected", nil, class: "btn btn-primary js-ship-button",
+        data: { toggle: :tooltip, placement: :top },
+        title: "Ship the selected products to the selected warehouse"
+
+
+.row
+  .col-lg-12
+    = index_table 'product-list' do
+      %thead
+        %tr
+          %th.checkbox-inside
+            %input.large.js-select-all{type: :checkbox, name: :dummy}
+          %th Product
+          %th.width-120
+            .zone-label.zone-pack Packed
+          %th.width-120
+            .zone-label.zone-ship FBA total
+          %th.width-120.js-viewmode-cases Cases to ship
+          %th.width-120.js-viewmode-items.hidden Items to ship
+          %th.width-120.fba-allocation FBA Allocation
+
+      %tbody
+        - presenter.product_presenters.each do |product_presenter|
+          %tr{data: { "product-id" => product_presenter.product_id }}
+            %td.checkbox-inside
+              %input.large{type: :checkbox, name: :dummy}
+            %td= render "products/product_as_icon_and_text", product: product_presenter.product
+            %td
+              .font-large= product_presenter.packed_inventory_quantity
+              .days= "#{product_presenter.packed_inventory_quantity_in_days} days"
+            %td
+              .font-large= product_presenter.total_amazon_inventory
+              .days= "#{product_presenter.days_of_cover} days"
+              .progress.fba-coverage
+                .progress-bar{ "aria-valuemax" => product_presenter.items_per_case, "aria-valuemin" => "0", 
+                  "aria-valuenow" => "100", :role => "progressbar", 
+                  :style => "width: #{product_presenter.amazon_coverage_ratio_limited}%;" }
+                  %span= raw "#{product_presenter.amazon_coverage_ratio}%"
+            
+            -# Optimal shipment in single items
+            %td.js-viewmode-items.hidden
+              .font-large= product_presenter.to_ship
+              .days= "#{product_presenter.to_ship_in_days} days"
+            
+            -# Optimal shipment in cases
+            %td.js-viewmode-cases
+              .font-large= product_presenter.to_ship_in_cases
+              .items-per-case= raw "#{product_presenter.items_per_case}&nbsp;ppc"
+              -if product_presenter.to_ship_case_excess > 0
+                .progress.case-excess
+                  .progress-bar{ "aria-valuemax" => product_presenter.items_per_case, "aria-valuemin" => "0", 
+                    "aria-valuenow" => "100", :role => "progressbar", 
+                    :style => "width: #{product_presenter.to_ship_case_excess_percent}%;" }
+                    %span= raw "#{product_presenter.to_ship_case_excess}&nbsp;pc&nbsp;excess"
+
+            -# FBA alloaction for single items
+            %td.js-fba-allocation.js-viewmode-items.hidden{ data:                              |
+              { 'fba-allocations' => product_presenter.fba_allocations_json,                   |
+                'packed-inventory-quantity' => product_presenter.packed_inventory_quantity } } |
+              .js-in-place-editable
+                = link_to product_presenter.to_allocate_item_quantity, nil, 
+                  class: 'js-to-ship-qty-override-link'
+                = bootstrap_form_for product_presenter.product, remote: true do |f|
+                  = f.number_field :to_ship_item_qty_override, hide_label: true, min: 0, value: product_presenter.to_allocate_item_quantity, class: 'js-to-ship-qty-override'
+
+            -# FBA alloaction for cases
+            %td.js-fba-allocation.js-viewmode-cases{ data:                                     |
+              { 'fba-allocations' => product_presenter.fba_allocations_json,                   |
+                'packed-inventory-quantity' => product_presenter.packed_inventory_quantity } } |
+              .js-in-place-editable
+                = link_to product_presenter.to_allocate_case_quantity, nil, 
+                  class: 'js-to-ship-qty-override-link'
+                = bootstrap_form_for product_presenter.product, remote: true do |f|
+                  = f.number_field :to_ship_case_qty_override, hide_label: true, min: 0, value: product_presenter.to_allocate_case_quantity, class: 'js-to-ship-qty-override'

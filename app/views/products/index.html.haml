@@ -1,0 +1,21 @@
+= page_header do
+  %i.fa.fa-barcode.fa-fw
+  Product Inventory
+
+%ul.nav.nav-tabs{role: "tablist"}
+  - zones.each do |zone|
+    %li{role: "presentation",
+        class: "#{active_zone_class(zone, current_zone)}"}
+      %a.js-products-zone-tab{href: "##{zone.slug}",
+        role: "tab",
+        data: { toggle: "product-zone",
+                zone: "#{zone.slug}",
+                products_url: "#{zone_products_path(zone)}"}}
+        = zone.name
+
+.tab-content
+  - zones.each do |zone|
+    .tab-pane{role: "tabpanel", 
+      id: "#{zone.slug}",
+      class: "js-tab-products-#{zone.slug} #{active_zone_class(zone, current_zone)}"}
+
